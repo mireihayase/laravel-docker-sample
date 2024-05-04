@@ -1,0 +1,31 @@
+version: '3'
+
+volumes:
+  db_volume:
+
+services:
+  db:
+    build: ./mysql
+    volumes:
+      - db_volume:/var/lib/mysql
+    ports:
+      - 3376:3306
+    environment:
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+  web:
+    container_name: laravel_dir
+    build: ./php
+    volumes:
+      - ./laravel_dir:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - 8871:80
+    links:
+      - db
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8071:8025s
