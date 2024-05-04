@@ -7,6 +7,11 @@ laravel_dir にlaravelを置く
 docker-compose build
 docker-compose up -d --build
 ```
+## 立ち上げ
+```
+docker-compose up -d 
+```
+```
 ## ログイン
 ```
 docker exec -it container_name bash
